@@ -1,0 +1,53 @@
+# COMP3311 23T1 Final Exam
+# Q6: ER -> Relational Mapping
+
+(a) ER mapping
+
+create table Peoples (
+    id integer primary key
+    name text not null
+    lives_in text not null
+)
+
+create table Customers (
+    id integer primary key
+)
+
+create table Accounts (
+    id integer primary key
+)
+
+create table Held_by (
+    account integer not null references Accounts(id)
+    customer integer not null referneces Customers(id)
+    primary key (customer, account)
+)
+
+create table Employees (
+    id integer primary key
+    salary integer check (salary >= 0)
+    works_in integer not null references Branches(id)
+)
+
+create table Branches (
+    id integer primary key
+)
+
+Note: 
+    overlap cannot be implemented
+
+
+
+(b) Single-table mapping
+
+create table Peoples (
+    id integer primary key
+    name text not null
+    lives_in text not null
+    accounts integer
+    works_in integer
+    salary integer check (salary >= 0)
+)
+
+Note:
+    cannot enforce total participation

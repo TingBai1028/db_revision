@@ -1,0 +1,67 @@
+# COMP3311 23T1 Final Exam
+# Q7: Triggers
+
+
+create function txChecker() returns trigger
+as $$
+
+declare
+    _srcBalance integer;
+    _destBalance integer;
+
+begin
+    -- check account numbers are valid
+    perfom * from accounts where id = new.SourceAcct;
+    if not found then
+        raise exception 'invalid account';
+    end if;
+
+    perform * from accounts where id = new.DestAcct;
+    if not found then
+        raise exception 'invalid account';
+    end if;
+
+    perform * from Held_by where customer = new.CustomerId and account = new.SourceAcct;
+    if not found then 
+        raise exception 'invalid owner';
+    end if;
+
+    perfom * from Held_by where customer = new.CustomerId and account = new.DestAcct;
+    if not found then
+        raise exception 'invalid owner';
+    end if;
+
+    select balance into _srcBalance
+    from accounts 
+    where id = new.SourceAcct;
+
+    select balance into _destBalance
+    from accounts 
+    where id = new.DestAcct;
+
+    if new.TxType = 'deposit' or new.TxType = 'transfer' then
+        if _srcBalance < new.amount then
+            raise exception 'not enought'
+        end if;
+    else 
+        if _destBalance < new.amount then
+            raise exception 'not enough money'
+        end if;
+    end if;
+    return new;
+end;
+$$ plpgsql;
+
+create function txUpdater() returns trigger
+as $$
+begin
+    insert into 
+end;
+$$ plpgsql;
+
+
+create trigger txcheck before insert on Transactions
+execute funciton txChecker;
+
+create trigger txupdate after insert on Transactions
+execute function txUpdater;

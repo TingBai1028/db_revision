@@ -1,0 +1,22 @@
+# COMP3311 23T1 Final Exam
+# Q8: Relational Algebra
+
+A. select given,family from Customers ...
+
+Res = Proj[given,family](Sel[lives_in='Kingsford'](Customers))
+
+
+
+B. select a.id,a.balance from Accounts join ...
+
+Tmp = Accounts Join[held_at=id] Branches
+Res(id,balance) = Sel[location='Mascot'](Tmp)
+
+
+
+C. select c.given, c.family, t.source, t.amount ...
+
+Tmp = Transactions Join[actor=id] Customers
+Tmp = Tmp Join[source=id] Accounts
+Tmp = Tmp Join[held_at=id] Branches
+Res(given,family,source,amount) = Sel[tdate<'2022-05-01' and ttype='withdrawal'](Tmp)
