@@ -1,0 +1,66 @@
+A. ER-style
+
+    - each entity becomes a separate table
+    - containing attributes of subclass + FK to superclass table
+
+    answer: 
+    create table R (
+        id integer primary key
+        x text
+    );
+
+    create table A (
+        R integer reference R(id),
+        y text,
+        primary key (R)
+    );
+
+    create table B (
+        R integer reference R(id),
+        primary key (R)
+    );
+
+    - note that there is multi valued attributes (MVAs)
+    - means that for example, a person can have attributes -> interest, 
+    -       and person can have more than insterest
+    - solution: 
+    - two table
+    -       person table contian no MVAs (table person)
+    -       table with only MVA (table personInsterest)
+
+    create table C (
+        R integer reference R(id),
+        primary key (R)
+    );
+
+    create table Cz (
+        R integer reference R(id),
+        z text,
+        primary key (R)
+    );
+
+- constraints cannot be implemented:
+    - cannot enforce disjoint subclass
+    - cannot restrict R to one subclass
+    - cannot enforce total participation
+
+
+B. single table
+
+    - whole class hierachy becomes a one single table
+    - containing all attributes of all subclasses
+
+    create table R (
+        id integer primary key,
+        is_a char(1) not nulll check (is_a in ('A', 'B', 'C')) - this enforce disjoint
+        x text,
+        y text 
+    );
+
+    create table Rz (
+        id integer primary key,
+        z text
+    );
+
+    - cannot enforce that Rz only reference R ruples where R.is_a == 'C'
+     (cannot make sure Rz is a C)

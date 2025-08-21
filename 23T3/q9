@@ -1,0 +1,33 @@
+A. seelct name form studnets;
+
+    Res = Proj[name](Students)
+    #tuples in result is 10000
+
+B. select distinct age from Students;
+
+    Res = Proj[age](Students)
+    #tuples in result is 10
+
+C. select name from Students where id = 5812345;
+
+    Tmp(id,name,age) = Sel[id=5812345](Students)
+    Res = Proj[name](Tmp)
+
+    #tupes in result is 1
+
+D. select name from Students where age between 18 and 21;
+
+    Tmp(id,name,age) = Sel[age >= 18 and age <= 21](Students)
+    Res = Proj[name](Tmp)
+
+    #tuples in resutl is 4000
+    (18 - 19: 1000, 19-20: 1000 ....)
+
+E. select s.id,e.mark
+    from   Students s join Enrolments e on (s.id=e.stu)
+    where  s.id = 5812345;
+
+    Tmp(id, name, age) = Sel[id=5812345](studnets)
+    Res(id,mark) = Join[id=stu](Tmp,Enrolments)
+
+    #tuples in result is 4

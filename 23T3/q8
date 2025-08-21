@@ -1,0 +1,13 @@
+create function prod(product integer, x integer) returns integer
+as $$
+begin 
+    select product * x;
+end;
+$$ language sql;
+
+create or replace aggregate product (integer) (
+    stype = integer
+    initcond = '1'
+    sfunc = prod
+)
+

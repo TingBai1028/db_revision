@@ -1,0 +1,37 @@
+- implement triggers that could check for fk being valid
+
+- insert new value into R
+- update R: 
+    - update s_ref
+    - update t_ref
+    - update s_ref and t_ref
+
+- we are going to insert R, as new
+-   and R contiain s_ref and t_ref is what we need to check.
+-   check s_ref whether is in s table as id
+-   check t_ref whether is in t tbale as id
+
+A.
+
+create trigger check before insert or update
+on R for each row execute function check(); -- "function" instead of "procedure" beacuse new version of sql syntax
+
+create function check() returns trigger as $$
+begin
+    perform * from S where id = new.s_ref 
+    if not found then 
+        raise exception 'Invalid foreign key'
+    end if;
+
+    perfom * from T where id = new.t_ref 
+    if not found then 
+        raise exception 'Invalid foreign key'
+    end if;
+    return new;
+
+end;
+$$ language plpgsql;
+
+B. 
+    No 
+    Deleting a tuple in R cannot cause any foreign key constraints problem
