@@ -3,12 +3,12 @@
 
 
 (A) Proj[a]R
-    R table contain only coloumn a 
+    R table contain only coloumn a and be distinct
 
 
 (B) Sel[e>d]S
 
-    e d
+    e d c 
     8 7
     9 6
 
@@ -28,7 +28,10 @@
 
 (E) R Div T
 
-    1 a
-    4 b
+    a
+    --
+    x
+
+    return teh answer which is not in table T but in table R. 
 
 

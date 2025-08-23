@@ -43,8 +43,11 @@ cannot implement total participation because table is split
 
 create table A (
     id integer primary key
+    is_b boolean -- true if A is b
+    is_c boolean -- true if A is c 
     x text
     y text
+    constraint subclass check (b or c) -- ensure total participation
 );
 
 create table Az (
