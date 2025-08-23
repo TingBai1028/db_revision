@@ -1,0 +1,19 @@
+# COMP3311 22T3 Final Exam Q8
+# Python/Psycopg2 analysis
+
+(A)
+
+    wam
+
+(B)
+
+    db connection error
+
+(C)
+
+    1 + 10 * 3 = 31
+
+(D)
+
+    fetch all in one query
+

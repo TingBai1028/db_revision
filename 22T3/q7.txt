@@ -1,0 +1,34 @@
+# COMP3311 22T3 Final Exam Q7
+# Relational Algebra
+
+
+(A) Proj[a]R
+    R table contain only coloumn a 
+
+
+(B) Sel[e>d]S
+
+    e d
+    8 7
+    9 6
+
+(C) R Join S
+    a b c e d 
+    x 1 a 6 9
+    y 2 b 7 8
+    z 3 a 6 9
+    x 4 b 7 8
+    y 5 a 6 9
+
+
+(D) R Join[b=e] S
+
+    a b c e d 
+
+
+(E) R Div T
+
+    1 a
+    4 b
+
+
