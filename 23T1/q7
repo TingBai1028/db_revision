@@ -39,6 +39,9 @@ begin
     from accounts 
     where id = new.DestAcct;
 
+    -- can be 
+    if new.ttype in ('withdrawal', 'transfer')
+
     if new.TxType = 'deposit' or new.TxType = 'transfer' then
         if _srcBalance < new.amount then
             raise exception 'not enought'
@@ -54,8 +57,30 @@ $$ plpgsql;
 
 create function txUpdater() returns trigger
 as $$
+declare 
+    branch_id integer
 begin
-    insert into 
+    if (new.ttype in ('withdrawal', 'transfer')) then 
+        update Accounts set balance = balance - new.amount
+        where id = new.source;
+        
+        select held_at into branch_id
+        from Accounts where id = new.source;
+        
+        update Branches set assets = assets - new.amount
+        where id = branch_id;
+    end if;
+
+    if (new.type in ('deposit', 'transfer')) then
+        update Accounts set balance = balance + new.amount
+        where id = new.dest;
+
+        select held_at into branch_id
+        from Accounts where id = new.dest;
+
+        update Branches set assets = assets + new.amount
+        where id = branch_id;
+    end if;
 end;
 $$ plpgsql;
 

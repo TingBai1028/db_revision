@@ -4,22 +4,90 @@
 A.
 
 (i) conflict serializable? (show working)
+    Yes
 
+    There is egde from T1 to T2, R(X) in T1 is conflict with W(X) in T2
+    no other conflict
+    didn't form a cycle in the precedence graph
+    Therefore conflict serializable
 
 (ii) view serializable? (show working)
+    Yes
 
+    (All conflict serializable are view serializable)
+
+    serial schedule:
+    T1: R(X) R(Y) W(Y)
+    T2:               R(X) W(X)
+    R(X) in T1 and T2 read original value in A and S
+    W(X) continues perfoms last write on X in A and S
+    Y is not a shared item
+    Hence A is view equivalent with a serial schedule.
+    Therefore A is view serializable
 
 B.
 
 (i) conflict serializable? (show working)
-
+    NO
+    R(x) in T1 and W(x) in T2
+    R(Y) in T2 and W(Y) in T1
+    forms a loop
 
 (ii) view serializable? (show working)
+    No
 
+
+    T1 reads the initial value of X
+    T2 reads the initial value of Y
+
+    T1 write the final version of Y
+    T2 write the final version of X
+
+    Sample answer:
+    Consider serial schedule T1;T2, named S1:
+        T1:  R(X)  W(Y)
+        T2:              R(Y)  W(X)
+    In S1, R(Y) in T2 reads the value of Y written by T1,
+    but, in B, it reads the initial value of Y.
+    So, B and S1 are not view equivalent.
+
+    Consider serial schedule T2;T1, named S2:
+        T1:              R(X)  W(Y)
+        T2:  R(Y)  W(X)
+    In S2, R(X) in T1 reads the value of X written by T2,
+    but, in B, it reads the initial value of X.
+    So, B and S2 are not view equivalent.
+
+    Because B is not view equivalent with any serial schedule,
+    B is not view serializable.
 
 C.
 
 (i) conflict serializable? (show working)
+    No, 
 
+    There is a edge from T1 to T2, W(X) in T1 is conflict with W(x) in T2
+    There is a edge from T2 to T1, R(Y) in T2 is conflict with W(Y) in T1
+
+    Hence forms a cycle in precedence graph
+    Therefore is not conflict serializable
 
 (ii) view serializable? (show working)
+
+    T2 reads the initial value of Y
+    T1 writes the final value of y
+    T3 writes the final value of X
+
+    consider serial schedule T1;T2;T3, named S1:
+        T1: W(Y) W(X)
+        T2:           R(Y) W(X)
+        T3:                     W(X)
+    in this case, T2 reads the value of Y which is written by T1, so they are not 
+    equavalence
+
+    consider seral schedule T2;T3;T1, named S2:
+        T1:          W(Y) W(X)
+        T2: R(Y) W(X)
+        T3:                   W(X)
+    in this case, T2 reads the initial value of Y, T3 writes the final x and T1 wirtes 
+    final Y, hence it is view equavenlence. hence it is view serializable.
