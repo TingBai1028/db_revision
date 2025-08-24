@@ -1,0 +1,28 @@
+A. 
+    A -> BC
+    D -> EF
+
+B. 
+    fds: A -> BC, D -> EF, pk: AD
+
+    A -> BC doesn't satisfy BCNF, since there is no pk in lfs
+
+    Decompose into
+        S = ABC, Fs = {A -> BC}, key(S) = A 
+        T = ADEF, Ft = {D -> EF}, key(T) = AD 
+
+    D -> EF doesn't satisfy BCNF, since there is not pk in lfs 
+
+    Decompose into 
+        U = DEF, Fu = {D -> EF}, key(U) = D 
+        V = AD, Fv = {}, key(V) = AD 
+
+    result: 
+        S = ABC, key(S) = A 
+        U = DEF, key(U) = D 
+        V = AD, key(V) = AD 
+
+C. 
+    S: student table 
+    U: supervisor table 
+    V: student to supervisor relationship
