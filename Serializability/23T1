@@ -1,0 +1,37 @@
+A.
+    a) 
+        conflict serializable
+
+    b) 
+        view serializable
+
+        T1: R(X) R(Y) W(Y)
+        T2:                R(X) W(X)
+
+B.
+    a)
+        No, formed a cycle
+
+    b)
+        x first read: T1
+        x last write: T2
+
+        y first read: T2
+        y last write: T1
+
+        is view serializable, the equivalence:
+        T2;T1
+        T1:          R(X) W(Y)
+        T2: R(Y) W(X)
+
+C.
+    a)
+        No, formed a cycle
+
+    b)
+        x last write: T3
+        
+        y first read: T2
+        y last write: T1 
+
+        T2;T1;T3

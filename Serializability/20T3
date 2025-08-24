@@ -1,0 +1,10 @@
+A.
+    No. formed a loop
+
+B.
+    y first read: T2
+    Y last write: T1
+
+    x last write: T3
+
+    T2;T1;T3
