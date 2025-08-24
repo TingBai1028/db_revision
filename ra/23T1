@@ -1,0 +1,15 @@
+A. 
+    Tmp1 = Sel[lives_in='Kingsford'](Customers)
+    Res = Proj[given,family](Tmp1) 
+
+B.
+    Tmp1 = Sel[location='Mascot'](Branches)
+    Tmp2 = Accounts Join[accounts.held_at = Tmp1.id] Tmp1
+    Res(id, balance) = proj[id, balance](Tmp2)
+
+C.
+    Tmp1 = Sel[tdate < '2022-05-01' ^ ttype = 'withdrawal'](Transactions)
+    Tmp2 = Tmp1 Join[actor=id] Customers
+    Tmp3 = Tmp2 Join[source=id] Accounts
+    Tmp4 = Tmp3 Join[held_at=id] Branches
+    Res = Proj[given,family,source,amount](Tmp4)

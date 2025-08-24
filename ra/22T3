@@ -1,0 +1,31 @@
+A.
+    a 
+   ---
+    x
+    y
+    z
+    x
+    y
+
+B.
+    e d c
+    -----
+    8 7 c
+    9 6 d
+
+C.
+    a b c e d
+    ---------
+    x 1 a 6 9
+    y 2 b 7 8
+    z 3 a 6 9
+    x 4 b 7 8
+    y 5 a 6 9
+
+D.
+    a b R.c e d S.c
+
+E.
+    a
+    -
+    x

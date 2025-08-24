@@ -1,0 +1,16 @@
+A.
+    Res = Sel[true]R
+
+B.
+    Tmp(a,b,c) = Sel[c<0](R)
+    Res(a,b) = Proj[a,b](Tmp)
+
+C.
+    Tmp1(a,b,c) = Sel[c<0](R)
+    Tmp2(a,b,c,d,e) = Tmp1 Join[b=e] S 
+    Res = Proj[a,d](Tmp2)
+
+D.
+    Tmp1 = R join T 
+    Tmp2 = Tmp1 join S 
+    Res = Proj[b,c,e,f](Tmp2)

@@ -1,0 +1,15 @@
+A.
+Res = Proj[name](Students)
+
+B.
+Res = Proj[age](Students)
+
+C.
+Res = Proj[name](<Sel[id=5812345](Students)>)
+
+D.
+Res = Proj[name](Sel[age >= 18 ^ age <= 21](Studnets))
+
+E.
+Tmp1(id,mark) = Students Join[studnets.id = enrolments.stu] Enrolments
+Res(id,mark) = Sel[id=5812345](Tmp1)
