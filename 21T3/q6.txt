@@ -1,0 +1,37 @@
+# COMP3311 21T3 Final Exam Q6
+# SQL schema from ER design
+
+
+create type TagType as enum (
+    'vegetarian', 'spicy', 'korean', 'easy-to-make'
+);
+
+create table User (
+    id integer primary key,
+    name text not null,
+    email text not null
+);
+
+create table recipe (
+    id integer primary key,
+    title text not null,
+    owned_by integer not null references User(id), -- not null enforce total participation
+);
+
+create table RecipeTag (
+    id integer primary key,
+    tag TagType not null
+);
+
+create table Ingredient (
+    id integer primary key,
+    name text not null
+);
+
+create table Uses (
+    recipe integer not null references Recipe(id),
+    ingredient integer references integer(id),
+    amount integer not null check (integer >= 0),
+    unit text not null,
+    primary key (recipe, ingredient)
+);

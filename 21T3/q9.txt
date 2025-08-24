@@ -1,0 +1,25 @@
+# COMP3311 21T3 Final Exam Q9
+# Flight booking triggers
+
+(A)
+
+    check if the flight number is valid
+
+    check if the flight have enough seats
+
+(B)
+
+
+
+(C)
+
+
+
+(D)
+
+
+
+(E)
+
+
+

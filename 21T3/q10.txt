@@ -1,0 +1,19 @@
+# COMP3311 21T3 Final Exam Q10
+# BCNF normalization
+
+(A)
+
+    A -> BC 
+    D -> EF 
+
+
+
+(B)
+
+    - candidate key: AD
+
+(C)
+
+
+
+

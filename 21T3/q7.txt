@@ -1,0 +1,19 @@
+# COMP3311 21T3 Final Exam Q7
+# Python/Psycopg2 scripts
+
+(A)
+
+
+
+
+(B)
+
+    A: 1 + 10 = 11
+    B: 1
+
+
+(C)
+
+    B is faster since only fetch once
+
+
