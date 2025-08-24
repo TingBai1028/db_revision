@@ -1,0 +1,46 @@
+-- ER STYLE
+create table A (
+    id integer primary key,
+    x text
+);
+
+create table B (
+    A integer references A(id),
+    y text,
+    primary key (A)
+);
+
+create table C (
+    A integer references A(id),
+    primary key (A)
+);
+
+create table Cz (
+    C integer references C(id),
+    z text,
+    primary key (C)
+);
+
+create table D (
+    id integer primary key,
+    w text
+);
+
+create table R (
+    c integer references C(id),
+    d integer references D(id),
+    primary key (c, d)
+);
+
+-- cannot enforce total participation 
+
+create table A (
+    id integer primary key,
+    x text,
+    is_b boolean not null,
+    is_c boolean not null,
+
+    constraint total_participation check (
+        is_b is true or is_c is true
+    )
+)

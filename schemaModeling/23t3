@@ -1,0 +1,52 @@
+naming conventions:
+    table name
+    column name 
+    fk must be named after the table they refer to 
+    mva can be named whatever
+
+ER style: 
+
+create table R (
+    id integer primary key, -- pk: automatically check not null and unique
+    x text
+);
+
+create table A (
+    R integer references R(id),
+    y text 
+);
+
+create table B (
+    R integer references R(id)
+);
+
+create table C (
+    R integer references R(id)
+);
+
+create table Cz (
+    C integer references C(id),
+    z text
+);
+
+-- ER style cannot implent disjoint as it cannot ensure R only have 
+-- one subclass referenced. can be implemnet as trigger
+
+-- ER style cannot enforce total participation
+-- cannot enforce every R appears in at least one (A / B / C)
+
+create table R (
+    id integer primary key,
+    x text,
+    is_a char(1) not null check (is_a in ('A', 'B', 'C')),
+    y text
+);
+
+create table Rz (
+    R integer references R(id)
+    z text 
+);
+
+-- can enforce disjoint
+-- can enforce total participation
+-- cannot enforce Rz only reference to table when R is C

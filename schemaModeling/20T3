@@ -1,0 +1,42 @@
+-- A
+create table U (
+    id integer primary key,
+    a integer,
+    b integer
+);
+
+create table Um (
+    u integer references U(id),
+    m text,
+    primary key (u)
+);
+
+-- B
+create table S (
+    id integer primary key,
+    T integer not null references T(id) 
+);
+
+create table T (
+    id integer primary key,
+    c text
+)
+
+-- C
+create table P (
+    id integer primary key,
+    e text
+);
+
+create table Q1 (
+    P integer references P(id),
+    f integer
+);
+
+same table Q2, Q3
+
+canot implement disjoint in er style table because we cannot ensure that 
+P is either a q1 or a q2 or a Q3
+
+and cannot implentn total participation because we cannot ensure every p is 
+referenced by q1 or q2 or q3

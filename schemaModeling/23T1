@@ -1,0 +1,56 @@
+
+
+create table People (
+    id integer primary key,
+    name text,
+    lives_in text
+);
+
+create table Customers (
+    people integer People(id),
+);
+
+create table Accounts (
+    id integer primary key
+);
+
+create table Held_by (
+    account integer references Accounts(id),
+    customer integer references Customers(people)
+);
+
+create table Employees (
+    people integer People(id),
+    salary integer not null check (salary > 0),
+    works_in integer references Branches(id)
+);
+
+create table Branches (
+    id integer primary key
+);
+
+-- ER cannot enforces total participation as we cannot make sure
+-- that every people is customer or employees
+
+
+create table People (
+    id integer primary key,
+    name text,
+    lives_in text,
+
+    is_customer boolean not null,
+    is_employee boolean not null,
+
+    works_in references Branches(id),
+    salary integer not null check (salary > 0)
+
+    
+
+    constraint total_participation check (
+        is_customer = true or is_employee = true
+    )
+)
+
+-- and accounts and held by table
+
+-- 

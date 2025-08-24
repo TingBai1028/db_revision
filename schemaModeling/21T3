@@ -1,0 +1,30 @@
+create table User (
+    id integer primary key,
+    name text not null,
+    email text not null
+);
+
+create table Recipe (
+    id integer primary key,
+    title text not null,
+    owned_by integer references User(id)
+);
+
+create table Tags (
+    recipe integer references Recipe(id),
+    tag text not null check (tag in ('vegetarian', 'spicy', 'korean', 'easy-to-make')),
+    primary key (recipe)
+);
+
+create table Ingredient (
+    id integer primary key,
+    name text not null
+);
+
+create table Uses (
+    recipe integer references Recipe(id),
+    ingredient integer references Ingredient(id),
+    amount integer not null check (amount > 0),
+    unit text not null,
+    primary key (recipe, ingredient)
+)
